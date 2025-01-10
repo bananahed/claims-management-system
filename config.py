@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from pymongo import MongoClient
 
-load_dotenv('C:/Users/joeya/Desktop/cms-final/cms-backend/.env')
+load_dotenv('envpath')
 
 MONGO_URI = os.getenv('MONGO_URI')
 DB_NAME = os.getenv('db')
