@@ -134,6 +134,9 @@ def assign_policy():
     policyholders[data['policyholder_id']]['user_policies'][data['policy_id']] = default
     return "Policy assigned successfully."
 
+    return jsonify({'message':"Policy assigned successfully."}),200
+# test comment
+
 #file claim
 @app.route('/file-claim',methods=["POST"])
 def file_claim():
