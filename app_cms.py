@@ -265,7 +265,6 @@ def file_claim(current_user):
 @token_required
 def get_policies(current_user):
     policy_id = request.args.get('policy_id')
-    policy_name = request.args.get()
     if policy_id:
         policy = db.policies.find_one({'_id':policy_id})
         if policy:
