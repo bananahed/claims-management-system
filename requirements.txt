@@ -1,0 +1,7 @@
+Flask==3.0.3
+flask-cors==5.0.0
+flask-swagger-ui==4.11.1
+python-dotenv==1.0.1
+pymongo==4.8.0
+Werkzeug==3.0.4
+PyJWT==2.3.0
