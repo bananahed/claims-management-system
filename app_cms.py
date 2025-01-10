@@ -280,18 +280,18 @@ def get_policies(current_user):
 @token_required
 def get_policyholders(current_user):
     policyholder_id = request.args.get('policyholder_id')
-    search_name = request.args.get('name')
+    # search_name = request.args.get('name') removed because the ui filters users using useState
     if policyholder_id:
         policyholder = db.policyholders.find_one({'_id':policyholder_id})
         if policyholder:
             return jsonify(policyholder),200
         else:
             return jsonify({'error': f"Policyholder with id: {policyholder_id} does not exists."}),404
-    elif search_name:
-        policyholders = list(db.policyholders.find({'name':{'$regex': search_name, '$options' : 'i'}},{'_id':1,'name':1,'email':1,'phone':1}))
-        if not policyholders:
-            return jsonify({'error':f"No policyholder found with name : {search_name}."}),404
-        return jsonify(policyholders),200
+    # elif search_name:
+    #     policyholders = list(db.policyholders.find({'name':{'$regex': search_name, '$options' : 'i'}},{'_id':1,'name':1,'email':1,'phone':1}))
+    #     if not policyholders:
+    #         return jsonify({'error':f"No policyholder found with name : {search_name}."}),404
+    #     return jsonify(policyholders),200
     else:
         policyholders = list(db.policyholders.find({},{'_id':1,'name':1,'email':1,'phone':1}))
         return jsonify(policyholders),200
