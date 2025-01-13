@@ -29,7 +29,7 @@ def register():
     db.users.insert_one(user)
     return jsonify({'message': 'User registered successfully'}), 201
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+# SECRET_KEY = os.getenv('SECRET_KEY')
 if not isinstance(SECRET_KEY, str):
     raise ValueError("Invalid secret key")
 
