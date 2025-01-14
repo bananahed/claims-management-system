@@ -1,6 +1,5 @@
-from flask import Flask, request, jsonify, make_response
-import os
-import datetime, re
+from flask import Flask, request, jsonify
+import datetime
 import jwt
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
