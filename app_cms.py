@@ -223,7 +223,7 @@ def assign_policy(current_user):
 @role_required('Agent', 'claim-admin','admin')
 def file_claim(current_user):
     raw_data = request.json
-    data = sanitize_inputs(raw_data)
+    data = sanitize_inputs(raw_data['claim_id'])
     #validations
     #check if policyholder exists
     if validate_policyid(data['policy_id']):
