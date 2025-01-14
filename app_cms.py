@@ -223,7 +223,7 @@ def assign_policy(current_user):
 @role_required('Agent', 'claim-admin','admin')
 def file_claim(current_user):
     raw_data = request.json
-    data = sanitize_inputs(raw_data['claim_id'])
+    data = sanitize_inputs(raw_data)
     #validations
     #check if policyholder exists
     if validate_policyid(data['policy_id']):
@@ -461,8 +461,8 @@ def update_claim_status(current_user):
             
         elif data['claim_status'] == "Rejected":
             result = db.policyholder.update_one(
-                {'_id': policyholder['_id'], 'user-policies.' + policy_id: {'$exists' : True}},
-                {'$set': {'user_policies.' + policy_id + '.available_limit': new_limit}}
+                {'_id': policyholder['_id'], 'claims.' + data['claim_id']: {'$exists': True}}, 
+                {'$set': {'claims.' + data['claim_id'] + '.claim_status': data['claim_status']}} 
             )
 
         return jsonify({'message':'Claim processed successfully.'}),200

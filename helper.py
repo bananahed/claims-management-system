@@ -84,10 +84,19 @@ def sanitize_inputs(data):
 
             value = re.sub(r"<script.*?>.*?</script>", "", value, flags=re.I|re.S)
             return value
-    if isinstance(data,dict):
-        sanitized_data = {key:sanitize_value(value) for key,value in data.items()}
+    def convert_to_int(value):
+        try:
+            return int(value)
+        except (ValueError, TypeError):
+            return value
+    if isinstance(data, dict):
+        sanitized_data = {key: sanitize_value(value) for key, value in data.items()}
+        if 'max_claim_amt' in sanitized_data:
+            sanitized_data['max_claim_amt'] = convert_to_int(sanitized_data['max_claim_amt'])
+        if 'claim_amt' in sanitized_data:
+            sanitized_data['claim_amt'] = convert_to_int(sanitized_data['claim_amt'])
         return sanitized_data
-    elif isinstance(data,str):
+    elif isinstance(data, str):
         return sanitize_value(data)
     else:
         return data
